@@ -1,25 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import { MobileDebitCard } from "./components/ModalDebitCard/MobileDebitCard";
+import { ButtonRecroll } from "./components/ButtonRecroll/ButtonRecroll";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function App() {
+export const App = () => {
+  const [selectedButtons, setSelectedButtons] = useState([]);
+    const history = useNavigate();
+  const handleOpenRecroll = (index) => {
+      setSelectedButtons((prevSelected) => [...prevSelected, index])
+      history('youtube');
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+      <div className="App">
+        <div className={'container'}>
+          {[...Array(300)].map((_, index) => {
 
-export default App;
+              if(index === 128){
+                  return <MobileDebitCard />
+              }
+              return <div onClick={() => setSelectedButtons((prevSelected) => [...prevSelected, index])} key={index}>
+                  <ButtonRecroll activeButton={selectedButtons.includes(index)} index={index} />
+              </div>
+          })}
+        </div>
+      </div>
+  );
+};
+

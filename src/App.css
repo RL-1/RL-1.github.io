@@ -1,5 +1,14 @@
 .App {
-  text-align: center;
+
+}
+.container {
+  display: grid;
+  grid-gap:10px;
+  grid-template-columns: repeat(6,1fr);
+  @media screen and (max-width:766px){
+    grid-template-columns: repeat(3,1fr);
+
+  }
 }
 
 .App-logo {
@@ -13,7 +22,7 @@
   }
 }
 
-.App-header {
+.App {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
